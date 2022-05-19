@@ -43,6 +43,7 @@ body{
   text-align: center;
   letter-spacing: .2rem;
   font-size: .8rem;
+  font-weight: 500;
   color: var(--primary-neon-green);
   margin-bottom: 1.9rem;
 }
@@ -54,6 +55,8 @@ body{
 }
 
 .advice-card__dice{
+  border: none;
+  outline: 0;
   background: var(--primary-neon-green);
   display: flex;
   justify-content: center;
@@ -87,7 +90,7 @@ body{
   width: 100%;
   position: absolute;
   left: 0;
-  bottom: 2.5rem;
+  bottom: 1.25rem;
   font-size: .8rem;
   display: flex;
   justify-content: center;
