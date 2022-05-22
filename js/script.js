@@ -6,24 +6,25 @@ const adviceIdContainer = document.querySelector('.advice-card__id')
 const dice = document.querySelector('.advice-card__dice');
 const preloader = document.querySelector('.preloader');
 
-const generateAdvice = function () {
-  preloader.classList.remove('hidden');
-  adviceIdContainer.classList.add('hidden');
-  advicePlaceholder.classList.add('hidden');
-  
-  const request = new XMLHttpRequest();
-  request.open("GET", "https://api.adviceslip.com/advice");
-  request.send();
+const loading = function(status) {
+  preloader.classList[`${status ? 'remove' : 'add'}`]('hidden');
+  adviceIdContainer.classList[`${status ? 'add' : 'remove'}`]('hidden');
+  advicePlaceholder.classList[`${status ? 'add' : 'remove'}`]('hidden');
+}
 
+const generateAdvice = function() {
+  loading(true);
+  const request = new XMLHttpRequest();
+  request.open("GET", "https://api.adviceslip.com/advice")
+  request.send();
+  
   request.addEventListener('load', function() {
     let {slip: advice} = JSON.parse(request.responseText);
-
-    preloader.classList.add('hidden');
-    adviceIdContainer.classList.remove('hidden');
-    advicePlaceholder.classList.remove('hidden');
+    loading(false);
     adviceIdPlaceholder.textContent = advice.id;
     advicePlaceholder.textContent = `"${advice.advice}"`
   });
 }
+
 window.addEventListener('load', generateAdvice);
 dice.addEventListener('click', generateAdvice);
